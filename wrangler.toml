@@ -1,2 +1,6 @@
 name = "spotify-clone"
-pages_build_output_dir = "."
+main = "cloudflare-worker.js"
+compatibility_date = "2025-05-01"
+
+[assets]
+directory = "."
