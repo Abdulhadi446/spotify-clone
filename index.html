@@ -356,6 +356,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
         <button class="dl-new-btn" onclick="createAndSelectPlaylist()">Create</button>
       </div>
     </div>
+    <!-- Cloud download settings (hidden when local server is available) -->
+    <div id="dl-cloud" class="hidden" style="border-top:1px solid rgba(255,255,255,.08);padding-top:12px;margin-top:2px">
+      <label style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px">GitHub Token</label>
+      <input class="dl-input" id="dl-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="margin-bottom:4px" oninput="saveToken()"/>
+      <small style="color:var(--muted);font-size:11px;display:block;line-height:1.4">Stored in your browser only. Needs <code style="color:var(--green)">workflow</code> scope. <a href="https://github.com/settings/tokens" target="_blank" rel="noopener" style="color:var(--green)">Get one here</a></small>
+    </div>
     <div class="dl-status" id="dl-status">Ready to download.</div>
     <div class="dl-actions">
       <button class="btn-cancel" onclick="closeDownload()">Cancel</button>
@@ -384,6 +390,18 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 <script>
 const API = 'http://localhost:8765';
 
+// ══ GitHub repo config (for cloud downloads via Actions) ══
+const GH_OWNER    = 'Abdulhadi446';
+const GH_REPO     = 'spotify-clone';
+const GH_WORKFLOW = 'add-song.yml';
+const GH_BRANCH   = 'master';
+let ghToken = localStorage.getItem('spotify-clone-gh-token') || '';
+
+function saveToken() {
+  ghToken = document.getElementById('dl-token').value.trim();
+  localStorage.setItem('spotify-clone-gh-token', ghToken);
+}
+
 // ══ Detect if local server is running ══
 let apiAvailable = false;
 fetch(`${API}/playlists`, {signal: AbortSignal.timeout(2000)})
@@ -393,10 +411,9 @@ fetch(`${API}/playlists`, {signal: AbortSignal.timeout(2000)})
     if (!apiAvailable) {
       const dlBtn = document.querySelector('.dl-trigger');
       if (dlBtn) {
-        dlBtn.style.opacity = '0.35';
-        dlBtn.style.cursor = 'not-allowed';
-        dlBtn.title = 'Requires local server (run server.py)';
-        dlBtn.onclick = () => alert('Downloads require the local server.\nRun: python3 server.py');
+        dlBtn.style.opacity = '1';
+        dlBtn.style.cursor = 'pointer';
+        dlBtn.title = 'Download via GitHub Actions (cloud)';
       }
     }
   });
@@ -765,6 +782,16 @@ async function openDownload() {
   document.getElementById('dl-status').className='dl-status';
   document.getElementById('dl-url').value='';
   document.getElementById('dl-go-btn').disabled=false;
+
+  // Show/hide cloud settings based on API availability
+  const cloudDiv = document.getElementById('dl-cloud');
+  if (!apiAvailable) {
+    cloudDiv.classList.remove('hidden');
+    document.getElementById('dl-token').value = ghToken;
+  } else {
+    cloudDiv.classList.add('hidden');
+  }
+
   document.getElementById('dl-overlay').classList.remove('hidden');
   document.getElementById('dl-url').focus();
 }
@@ -789,12 +816,58 @@ async function startDownload(){
   if(!url){ alert('Please enter a URL.'); return; }
   document.getElementById('dl-go-btn').disabled=true;
   document.getElementById('dl-status').className='dl-status';
-  document.getElementById('dl-status').textContent='Starting download…';
+
+  // ── Local server path ──
+  if (apiAvailable) {
+    document.getElementById('dl-status').textContent='Starting download…';
+    try {
+      const r = await fetch(`${API}/download`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,folder})});
+      const j = await r.json();
+      if(j.error){ throw new Error(j.error); }
+      pollJob(j.job_id, folder);
+    } catch(e) {
+      document.getElementById('dl-status').textContent='Error: '+e.message;
+      document.getElementById('dl-status').className='dl-status err';
+      document.getElementById('dl-go-btn').disabled=false;
+    }
+    return;
+  }
+
+  // ── Cloud path (GitHub Actions) ──
+  if (!ghToken) {
+    document.getElementById('dl-status').textContent='Enter a GitHub token above to use cloud downloads.';
+    document.getElementById('dl-status').className='dl-status err';
+    document.getElementById('dl-go-btn').disabled=false;
+    return;
+  }
+
+  document.getElementById('dl-status').textContent='Queuing download via GitHub Actions…';
   try {
-    const r = await fetch(`${API}/download`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,folder})});
-    const j = await r.json();
-    if(j.error){ throw new Error(j.error); }
-    pollJob(j.job_id, folder);
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${ghToken}`,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ref: GH_BRANCH,
+        inputs: { url, playlist: folder, confirm: 'yes' }
+      })
+    });
+
+    if (r.ok || r.status === 204) {
+      document.getElementById('dl-status').innerHTML =
+        '<span style="color:#1ed760">✓ Download queued!</span><br>' +
+        'The song will appear in <strong>~1–2 minutes</strong>.<br>' +
+        '<small style="color:var(--muted)">GitHub Actions is downloading it now. The page will refresh automatically.</small>';
+      document.getElementById('dl-status').className='dl-status ok';
+      // Auto-refresh after 90 seconds to pick up the new song
+      setTimeout(() => location.reload(), 90000);
+    } else {
+      const err = await r.json().catch(() => ({}));
+      throw new Error(err.message || `HTTP ${r.status}`);
+    }
   } catch(e) {
     document.getElementById('dl-status').textContent='Error: '+e.message;
     document.getElementById('dl-status').className='dl-status err';
