@@ -384,6 +384,23 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 <script>
 const API = 'http://localhost:8765';
 
+// ══ Detect if local server is running ══
+let apiAvailable = false;
+fetch(`${API}/playlists`, {signal: AbortSignal.timeout(2000)})
+  .then(r => { if (r.ok) apiAvailable = true; })
+  .catch(() => {})
+  .finally(() => {
+    if (!apiAvailable) {
+      const dlBtn = document.querySelector('.dl-trigger');
+      if (dlBtn) {
+        dlBtn.style.opacity = '0.35';
+        dlBtn.style.cursor = 'not-allowed';
+        dlBtn.title = 'Requires local server (run server.py)';
+        dlBtn.onclick = () => alert('Downloads require the local server.\nRun: python3 server.py');
+      }
+    }
+  });
+
 // ══ SONGS metadata map (from your tagger script) ══
 const SONGS_MAP = {
   "aap ka aana":            ["Dj Saurabh",                   "Aap Ka Aana Dil Dhadkana"],

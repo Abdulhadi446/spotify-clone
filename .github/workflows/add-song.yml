@@ -8,9 +8,13 @@ on:
         required: true
         type: string
       playlist:
-        description: 'Playlist/folder name'
+        description: 'Playlist/folder name (letters, numbers, hyphens only)'
         required: false
         default: 'Downloads'
+        type: string
+      confirm:
+        description: 'Type "yes" to confirm download'
+        required: true
         type: string
 
 permissions:
@@ -18,12 +22,47 @@ permissions:
 
 concurrency:
   group: add-song
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   add:
     runs-on: ubuntu-latest
     steps:
+      - name: Validate inputs
+        run: |
+          set -euo pipefail
+
+          # Confirm
+          if [ "${{ inputs.confirm }}" != "yes" ]; then
+            echo "::error::Download not confirmed. Type 'yes' to proceed."
+            exit 1
+          fi
+
+          # URL format
+          URL="${{ inputs.url }}"
+          if [[ ! "$URL" =~ ^https?:// ]]; then
+            echo "::error::Invalid URL. Must start with http:// or https://"
+            exit 1
+          fi
+
+          # Playlist name sanitisation
+          PLAYLIST="${{ inputs.playlist }}"
+          if [[ ! "$PLAYLIST" =~ ^[a-zA-Z0-9_-]+$ ]]; then
+            echo "::error::Invalid playlist name. Use only letters, numbers, hyphens, underscores."
+            exit 1
+          fi
+          if [ ${#PLAYLIST} -gt 64 ]; then
+            echo "::error::Playlist name too long (max 64 chars)."
+            exit 1
+          fi
+
+          # Supported platform hint
+          if [[ ! "$URL" =~ (youtube\.com|youtu\.be|soundcloud\.com|on\.soundcloud\.com|sc\.fm) ]]; then
+            echo "::warning::URL doesn't look like YouTube or SoundCloud. yt-dlp supports many sites, but this might fail."
+          fi
+
+          echo "✓ Inputs valid"
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -39,23 +78,59 @@ jobs:
         run: pip install --upgrade yt-dlp mutagen
 
       - name: Download song
+        id: download
         env:
           URL: ${{ inputs.url }}
           PLAYLIST: ${{ inputs.playlist }}
         run: |
+          set -euo pipefail
           mkdir -p "media/$PLAYLIST"
-          yt-dlp \
-            --extract-audio \
-            --audio-format mp3 \
-            --audio-quality 0 \
-            --embed-metadata \
-            --no-playlist \
-            -o "media/$PLAYLIST/%(title)s.%(ext)s" \
-            "$URL"
-          echo "--- Downloaded ---"
-          ls -la "media/$PLAYLIST/"
+
+          # Remember what was there before
+          BEFORE=$(find "media/$PLAYLIST" -name '*.mp3' -type f | sort)
+
+          # Download with retry (3 attempts, exponential backoff)
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt of 3..."
+            if yt-dlp \
+              --extract-audio \
+              --audio-format mp3 \
+              --audio-quality 0 \
+              --embed-metadata \
+              --no-playlist \
+              --no-overwrites \
+              -o "media/$PLAYLIST/%(title)s.%(ext)s" \
+              "$URL" 2>&1; then
+              break
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              WAIT=$((attempt * 5))
+              echo "Attempt $attempt failed, retrying in ${WAIT}s..."
+              sleep "$WAIT"
+            fi
+          done
+
+          # Find newly added file
+          AFTER=$(find "media/$PLAYLIST" -name '*.mp3' -type f | sort)
+          NEW_FILE=$(comm -13 <(echo "$BEFORE") <(echo "$AFTER") | head -1)
+
+          if [ -z "$NEW_FILE" ]; then
+            # File might already exist (--no-overwrites) — check if URL was already downloaded
+            echo "::warning::No new file found. Song may already exist in the playlist."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          FILE_SIZE=$(stat -c%s "$NEW_FILE" 2>/dev/null || stat -f%z "$NEW_FILE" 2>/dev/null || echo 0)
+          echo "file=$NEW_FILE" >> "$GITHUB_OUTPUT"
+          echo "filename=$(basename "$NEW_FILE")" >> "$GITHUB_OUTPUT"
+          echo "size=$FILE_SIZE" >> "$GITHUB_OUTPUT"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+          echo "✓ Downloaded: $(basename "$NEW_FILE") ($(numfmt --to=iec "$FILE_SIZE" 2>/dev/null || echo "${FILE_SIZE} bytes"))"
 
       - name: Regenerate songs.json
+        if: steps.download.outputs.changed == 'true'
         run: |
           python3 << 'PY'
           import os, json, re
@@ -88,15 +163,6 @@ jobs:
           playlists = {}
           all_tracks = []
 
-          for f in sorted(os.listdir(MEDIA)):
-              fp = os.path.join(MEDIA, f)
-              if os.path.isfile(fp) and f.lower().endswith('.mp3'):
-                  a, t = resolve_meta(f, fp)
-                  tr = {"filename": f, "path": f"media/{f}",
-                        "artist": a, "title": t, "playlist": "All Songs"}
-                  playlists.setdefault("All Songs", []).append(tr)
-                  all_tracks.append(tr)
-
           for entry in sorted(os.listdir(MEDIA)):
               ep = os.path.join(MEDIA, entry)
               if not os.path.isdir(ep): continue
@@ -110,20 +176,70 @@ jobs:
                       pl.append(tr)
                       all_tracks.append(tr)
 
+          playlists["All Songs"] = all_tracks
+
           with open('songs.json', 'w') as f:
               json.dump(playlists, f, indent=2)
-          print(f"Wrote {len(all_tracks)} tracks to songs.json")
-          print(f"Playlists: {list(playlists.keys())}")
+          print(f"✓ Wrote {len(all_tracks)} tracks across {len(playlists)} playlists")
           PY
 
       - name: Commit and push
+        if: steps.download.outputs.changed == 'true'
+        id: commit
+        env:
+          PLAYLIST: ${{ inputs.playlist }}
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add media/ songs.json
           if git diff --cached --quiet; then
-            echo "No new files to commit"
+            echo "⚠️ Nothing to commit"
             exit 0
           fi
-          git commit -m "Add song to ${{ inputs.playlist }}"
+
+          FILENAME="${{ steps.download.outputs.filename }}"
+          if [ -n "$FILENAME" ]; then
+            git commit -m "Add: $FILENAME → $PLAYLIST"
+          else
+            git commit -m "Update library → $PLAYLIST"
+          fi
+
           git push
+          echo "✓ Committed and pushed"
+
+      - name: Summary
+        if: always()
+        run: |
+          STATUS="${{ job.status }}"
+          URL="${{ inputs.url }}"
+          PLAYLIST="${{ inputs.playlist }}"
+          FILENAME="${{ steps.download.outputs.filename || '' }}"
+          FILESIZE="${{ steps.download.outputs.size || '0' }}"
+          CHANGED="${{ steps.download.outputs.changed || 'false' }}"
+
+          echo "### 🎵 Add Song Result" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Field | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | \`$STATUS\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| URL | $URL |" >> $GITHUB_STEP_SUMMARY
+          echo "| Playlist | \`$PLAYLIST\` |" >> $GITHUB_STEP_SUMMARY
+
+          if [ -n "$FILENAME" ]; then
+            HUMAN_SIZE=$(numfmt --to=iec "$FILESIZE" 2>/dev/null || echo "${FILESIZE} bytes")
+            echo "| File | \`$FILENAME\` |" >> $GITHUB_STEP_SUMMARY
+            echo "| Size | $HUMAN_SIZE |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "| Committed | $CHANGED |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$STATUS" = "success" ] && [ "$CHANGED" = "true" ]; then
+            echo "✅ Song added. Site will redeploy automatically." >> $GITHUB_STEP_SUMMARY
+          elif [ "$STATUS" = "success" ] && [ "$CHANGED" = "false" ]; then
+            echo "⚠️ Download succeeded but no new file committed (may already exist)." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Download failed. Check the logs above." >> $GITHUB_STEP_SUMMARY
+          fi

@@ -24,6 +24,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate site
+        run: |
+          if [ ! -f "index.html" ]; then
+            echo "::error::index.html not found"
+            exit 1
+          fi
+          echo "✓ index.html found"
+          echo "Files to deploy:"
+          find . -maxdepth 1 -not -name '.' -not -name '.git' -not -name '.github' | sort
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -36,3 +46,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### 🌐 Deploy Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "- **URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          fi
