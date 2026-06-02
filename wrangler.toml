@@ -1,8 +1,2 @@
-name = "spotify-clone-api"
-main = "cloudflare-worker.js"
-compatibility_date = "2025-05-01"
-
-[vars]
-ENVIRONMENT = "production"
-
-[env.production]
+name = "spotify-clone"
+pages_build_output_dir = "."
