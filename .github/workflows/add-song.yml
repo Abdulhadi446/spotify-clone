@@ -1,0 +1,129 @@
+name: Add Song
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'YouTube or SoundCloud URL'
+        required: true
+        type: string
+      playlist:
+        description: 'Playlist/folder name'
+        required: false
+        default: 'Downloads'
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: add-song
+  cancel-in-progress: true
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install tools
+        run: pip install --upgrade yt-dlp mutagen
+
+      - name: Download song
+        env:
+          URL: ${{ inputs.url }}
+          PLAYLIST: ${{ inputs.playlist }}
+        run: |
+          mkdir -p "media/$PLAYLIST"
+          yt-dlp \
+            --extract-audio \
+            --audio-format mp3 \
+            --audio-quality 0 \
+            --embed-metadata \
+            --no-playlist \
+            -o "media/$PLAYLIST/%(title)s.%(ext)s" \
+            "$URL"
+          echo "--- Downloaded ---"
+          ls -la "media/$PLAYLIST/"
+
+      - name: Regenerate songs.json
+        run: |
+          python3 << 'PY'
+          import os, json, re
+          try:
+              from mutagen.mp3 import MP3
+          except Exception:
+              MP3 = None
+
+          MEDIA = 'media'
+
+          def read_tags(path):
+              if not MP3: return None, None
+              try:
+                  audio = MP3(path)
+                  tags = audio.tags or {}
+                  artist = str(tags.get('TPE1', '')).strip()
+                  title  = str(tags.get('TIT2', '')).strip()
+                  return artist or None, title or None
+              except Exception:
+                  return None, None
+
+          def resolve_meta(filename, full_path):
+              name = filename[:-4] if filename.lower().endswith('.mp3') else filename
+              a, t = read_tags(full_path)
+              if a and t: return a, t
+              m = re.match(r'^(.+?)\s*[-–]\s*(.+)', name)
+              if m: return m.group(1).strip(), m.group(2).strip()
+              return 'Unknown Artist', name
+
+          playlists = {}
+          all_tracks = []
+
+          for f in sorted(os.listdir(MEDIA)):
+              fp = os.path.join(MEDIA, f)
+              if os.path.isfile(fp) and f.lower().endswith('.mp3'):
+                  a, t = resolve_meta(f, fp)
+                  tr = {"filename": f, "path": f"media/{f}",
+                        "artist": a, "title": t, "playlist": "All Songs"}
+                  playlists.setdefault("All Songs", []).append(tr)
+                  all_tracks.append(tr)
+
+          for entry in sorted(os.listdir(MEDIA)):
+              ep = os.path.join(MEDIA, entry)
+              if not os.path.isdir(ep): continue
+              pl = playlists[entry] = []
+              for f in sorted(os.listdir(ep)):
+                  fp = os.path.join(ep, f)
+                  if os.path.isfile(fp) and f.lower().endswith('.mp3'):
+                      a, t = resolve_meta(f, fp)
+                      tr = {"filename": f, "path": f"media/{entry}/{f}",
+                            "artist": a, "title": t, "playlist": entry}
+                      pl.append(tr)
+                      all_tracks.append(tr)
+
+          with open('songs.json', 'w') as f:
+              json.dump(playlists, f, indent=2)
+          print(f"Wrote {len(all_tracks)} tracks to songs.json")
+          print(f"Playlists: {list(playlists.keys())}")
+          PY
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add media/ songs.json
+          if git diff --cached --quiet; then
+            echo "No new files to commit"
+            exit 0
+          fi
+          git commit -m "Add song to ${{ inputs.playlist }}"
+          git push
