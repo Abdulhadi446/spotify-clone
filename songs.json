@@ -1,0 +1,472 @@
+{
+  "Chill": [],
+  "Favorites": [],
+  "Punjabi": [],
+  "Vibes": [],
+  "fav": [
+    {
+      "filename": "Aap Ka Aana Dil Dhadkana -_- Hard Bass Remix -_- Dj SAURABH Jaipur.mp3",
+      "path": "media/fav/Aap Ka Aana Dil Dhadkana -_- Hard Bass Remix -_- Dj SAURABH Jaipur.mp3",
+      "artist": "Dj Saurabh",
+      "title": "Aap Ka Aana Dil Dhadkana",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Akshath - Nadaaniyan (Official Lyric Video).mp3",
+      "path": "media/fav/Akshath - Nadaaniyan (Official Lyric Video).mp3",
+      "artist": "Akshath",
+      "title": "Nadaaniyan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Anuv Jain - AFSOS ft. AP Dhillon (Official Visualizer).mp3",
+      "path": "media/fav/Anuv Jain - AFSOS ft. AP Dhillon (Official Visualizer).mp3",
+      "artist": "Anuv Jain ft. AP Dhillon",
+      "title": "Afsos",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Anuv Jain - ALAG AASMAAN (a song on the ukulele).mp3",
+      "path": "media/fav/Anuv Jain - ALAG AASMAAN (a song on the ukulele).mp3",
+      "artist": "Anuv Jain",
+      "title": "Alag Aasmaan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Anuv Jain - HUSN (Lyrics).mp3",
+      "path": "media/fav/Anuv Jain - HUSN (Lyrics).mp3",
+      "artist": "Anuv Jain",
+      "title": "Husn",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Anuv Jain - JO TUM MERE HO (Lyrics).mp3",
+      "path": "media/fav/Anuv Jain - JO TUM MERE HO (Lyrics).mp3",
+      "artist": "Anuv Jain",
+      "title": "Jo Tum Mere Ho",
+      "playlist": "fav"
+    },
+    {
+      "filename": "BYE - Aditya Bhardwaj (Official Music Video).mp3",
+      "path": "media/fav/BYE - Aditya Bhardwaj (Official Music Video).mp3",
+      "artist": "Aditya Bhardwaj",
+      "title": "Bye",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Beqarar Yeh Dil - Meem Se Mohabbat [ Full OST ] \ud83d\udc9e Singers\uff1a Asim Azhar & Qirat Haider - HUM TV.mp3",
+      "path": "media/fav/Beqarar Yeh Dil - Meem Se Mohabbat [ Full OST ] \ud83d\udc9e Singers\uff1a Asim Azhar & Qirat Haider - HUM TV.mp3",
+      "artist": "Asim Azhar & Qirat Haider",
+      "title": "Baat",
+      "playlist": "fav"
+    },
+    {
+      "filename": "CHAL DIYE TUM KAHAN \uff5c LYRICAL OST \uff5c VIDEO SONG - 4K \uff5c KABHI MAIN KABHI TUM \uff5c MUSTAFA x SHARJEENA.mp3",
+      "path": "media/fav/CHAL DIYE TUM KAHAN \uff5c LYRICAL OST \uff5c VIDEO SONG - 4K \uff5c KABHI MAIN KABHI TUM \uff5c MUSTAFA x SHARJEENA.mp3",
+      "artist": "AUR",
+      "title": "Chal Diye Tum Kahan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ho Gya Hai Ishq (From \uff02Ishq Di Chashni\uff02).mp3",
+      "path": "media/fav/Ho Gya Hai Ishq (From \uff02Ishq Di Chashni\uff02).mp3",
+      "artist": "Qirat Haider",
+      "title": "Ho Gya Hai Ishq",
+      "playlist": "fav"
+    },
+    {
+      "filename": "I'm Done \uff5c Maan Panu \uff5c I-Popstar \uff1a Vol.1 \uff5c EP02 \uff5c Amazon MX Player.mp3",
+      "path": "media/fav/I'm Done \uff5c Maan Panu \uff5c I-Popstar \uff1a Vol.1 \uff5c EP02 \uff5c Amazon MX Player.mp3",
+      "artist": "Maan Panu",
+      "title": "I'm Done",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ishq Official Lyrical Video I Amir Ameer \uff5c Faheem Abdullah \uff5c Rauhan Malik I Love Song 2024.mp3",
+      "path": "media/fav/Ishq Official Lyrical Video I Amir Ameer \uff5c Faheem Abdullah \uff5c Rauhan Malik I Love Song 2024.mp3",
+      "artist": "Amir Ameer",
+      "title": "Ishq",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ishq Wala Love Full Video - SOTY\uff5cAlia Bhatt,Sidharth Malhotra,Varun Dhawan\uff5cNeeti Mohan.mp3",
+      "path": "media/fav/Ishq Wala Love Full Video - SOTY\uff5cAlia Bhatt,Sidharth Malhotra,Varun Dhawan\uff5cNeeti Mohan.mp3",
+      "artist": "Neeti Mohan",
+      "title": "Ishq Wala Love",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Jeena Jeena - Full Audio Song \uff5c Badlapur \uff5c Varun Dhawan, Yami Gautam \uff5c Sachin-Jigar.mp3",
+      "path": "media/fav/Jeena Jeena - Full Audio Song \uff5c Badlapur \uff5c Varun Dhawan, Yami Gautam \uff5c Sachin-Jigar.mp3",
+      "artist": "Sachin-Jigar ft. Atif Aslam",
+      "title": "Jeena Jeena",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Karan Aujla \uff5c Ikky - Boyfriend (Official Audio).mp3",
+      "path": "media/fav/Karan Aujla \uff5c Ikky - Boyfriend (Official Audio).mp3",
+      "artist": "Karan Aujla ft. Ikky",
+      "title": "Boyfriend",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Karan Aujla, Ikky - For A Reason (Lyrics).mp3",
+      "path": "media/fav/Karan Aujla, Ikky - For A Reason (Lyrics).mp3",
+      "artist": "Karan Aujla ft. Ikky",
+      "title": "For A Reason",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Khwab - Official Lyric Video \uff5c Iqlipse Nova \uff5c Aditya A.mp3",
+      "path": "media/fav/Khwab - Official Lyric Video \uff5c Iqlipse Nova \uff5c Aditya A.mp3",
+      "artist": "Iqlipse Nova ft. Aditya A",
+      "title": "Khwab",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Lyrical\uff1a Mere Liye Tum Kaafi Ho \uff5c Shubh Mangal Zyada Saavdhan \uff5cAyushman Khurana,Jeetu \uff5c Tanishk-Vayu.mp3",
+      "path": "media/fav/Lyrical\uff1a Mere Liye Tum Kaafi Ho \uff5c Shubh Mangal Zyada Saavdhan \uff5cAyushman Khurana,Jeetu \uff5c Tanishk-Vayu.mp3",
+      "artist": "Tanishk-Vayu",
+      "title": "Mere Liye Tum Kaafi Ho",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Paro x Maand Lyrics - Aditya Rikhari, Bayaan.mp3",
+      "path": "media/fav/Paro x Maand Lyrics - Aditya Rikhari, Bayaan.mp3",
+      "artist": "Aditya Rikhari",
+      "title": "Paro x Maand",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Qurbaniyan (Orignal Soundtrack from Dekh Zara Pyar Se).mp3",
+      "path": "media/fav/Qurbaniyan (Orignal Soundtrack from Dekh Zara Pyar Se).mp3",
+      "artist": "Asim Azhar",
+      "title": "Qurbaniyan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Raastah by AUR ft. Taimour Baig \uff5c \u0631\u0627\u0633\u062a\u06c1  (Official Music Video).mp3",
+      "path": "media/fav/Raastah by AUR ft. Taimour Baig \uff5c \u0631\u0627\u0633\u062a\u06c1  (Official Music Video).mp3",
+      "artist": "AUR ft. Taimour Baig",
+      "title": "Raastah",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ranjheya Ve.mp3",
+      "path": "media/fav/Ranjheya Ve.mp3",
+      "artist": "Zain Zohaib",
+      "title": "Ranjheya Ve",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Sahiba (Full Audio) \uff1a Aditya Rikhari, Ankita Chhetri \uff5c T-Series.mp3",
+      "path": "media/fav/Sahiba (Full Audio) \uff1a Aditya Rikhari, Ankita Chhetri \uff5c T-Series.mp3",
+      "artist": "Aditya Rikhari",
+      "title": "Sahiba",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Sahiba (Music Video) Jasleen Royal \uff5cVijay Deverakonda Radhikka Madan\uff5cStebin\uff5c Priya\uff5cAditya\uff5c Sudhanshu.mp3",
+      "path": "media/fav/Sahiba (Music Video) Jasleen Royal \uff5cVijay Deverakonda Radhikka Madan\uff5cStebin\uff5c Priya\uff5cAditya\uff5c Sudhanshu.mp3",
+      "artist": "Jasleen Royal ft. Stebin Ben",
+      "title": "Sahiba",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Shikayat by AUR \uff5c \u0634\u06a9\u0627\u06cc\u062a  (Official Music Video).mp3",
+      "path": "media/fav/Shikayat by AUR \uff5c \u0634\u06a9\u0627\u06cc\u062a  (Official Music Video).mp3",
+      "artist": "AUR",
+      "title": "Shikayat",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Shubh - One Love (Official Audio).mp3",
+      "path": "media/fav/Shubh - One Love (Official Audio).mp3",
+      "artist": "Shubh",
+      "title": "One Love",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Sometimes by AUR \uff5c \u0633\u0645 \u0679\u0627\u0626\u0645\u0632  (Official Audio).mp3",
+      "path": "media/fav/Sometimes by AUR \uff5c \u0633\u0645 \u0679\u0627\u0626\u0645\u0632  (Official Audio).mp3",
+      "artist": "AUR",
+      "title": "Sometimes",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Tera Mera Hai Pyar Amar (from \uff02Ishq Murshid\uff02).mp3",
+      "path": "media/fav/Tera Mera Hai Pyar Amar (from \uff02Ishq Murshid\uff02).mp3",
+      "artist": "Ahmed Jahanzeb",
+      "title": "Tera Mera Hai Pyar",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Tu Hai Kahan by AUR \uff5c \u062a\u0648 \u06c1\u06d2 \u06a9\u06c1\u0627\u06ba (Official Music Video).mp3",
+      "path": "media/fav/Tu Hai Kahan by AUR \uff5c \u062a\u0648 \u06c1\u06d2 \u06a9\u06c1\u0627\u06ba (Official Music Video).mp3",
+      "artist": "AUR",
+      "title": "Tu Hai Kahan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Tu Hain Toh \uff5c Mr. & Mrs. Mahi \uff5c Rajkummar Rao, Janhvi Kapoor \uff5c Hunny, Bunny, Sagar \uff5c Team Jaani.mp3",
+      "path": "media/fav/Tu Hain Toh \uff5c Mr. & Mrs. Mahi \uff5c Rajkummar Rao, Janhvi Kapoor \uff5c Hunny, Bunny, Sagar \uff5c Team Jaani.mp3",
+      "artist": "Hunny, Bunny, Sagar",
+      "title": "Tu Hain Toh",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Tum Hi Ho.mp3",
+      "path": "media/fav/Tum Hi Ho.mp3",
+      "artist": "Arijit Singh",
+      "title": "Tum Hi Ho",
+      "playlist": "fav"
+    },
+    {
+      "filename": "WAVY (OFFICIAL VIDEO) KARAN AUJLA \uff5c LATEST PUNJABI SONGS 2024.mp3",
+      "path": "media/fav/WAVY (OFFICIAL VIDEO) KARAN AUJLA \uff5c LATEST PUNJABI SONGS 2024.mp3",
+      "artist": "Karan Aujla",
+      "title": "Wavy",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ye Tune Kya Kiya Song Once Upon A Time In Mumbaai Dobara \uff5c Pritam \uff5c Akshay Kumar, Sonakshi Sinha.mp3",
+      "path": "media/fav/Ye Tune Kya Kiya Song Once Upon A Time In Mumbaai Dobara \uff5c Pritam \uff5c Akshay Kumar, Sonakshi Sinha.mp3",
+      "artist": "Pritam",
+      "title": "Ye Tune Kya Kiya",
+      "playlist": "fav"
+    }
+  ],
+  "All Songs": [
+    {
+      "filename": "Aap Ka Aana Dil Dhadkana -_- Hard Bass Remix -_- Dj SAURABH Jaipur.mp3",
+      "path": "media/fav/Aap Ka Aana Dil Dhadkana -_- Hard Bass Remix -_- Dj SAURABH Jaipur.mp3",
+      "artist": "Dj Saurabh",
+      "title": "Aap Ka Aana Dil Dhadkana",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Akshath - Nadaaniyan (Official Lyric Video).mp3",
+      "path": "media/fav/Akshath - Nadaaniyan (Official Lyric Video).mp3",
+      "artist": "Akshath",
+      "title": "Nadaaniyan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Anuv Jain - AFSOS ft. AP Dhillon (Official Visualizer).mp3",
+      "path": "media/fav/Anuv Jain - AFSOS ft. AP Dhillon (Official Visualizer).mp3",
+      "artist": "Anuv Jain ft. AP Dhillon",
+      "title": "Afsos",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Anuv Jain - ALAG AASMAAN (a song on the ukulele).mp3",
+      "path": "media/fav/Anuv Jain - ALAG AASMAAN (a song on the ukulele).mp3",
+      "artist": "Anuv Jain",
+      "title": "Alag Aasmaan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Anuv Jain - HUSN (Lyrics).mp3",
+      "path": "media/fav/Anuv Jain - HUSN (Lyrics).mp3",
+      "artist": "Anuv Jain",
+      "title": "Husn",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Anuv Jain - JO TUM MERE HO (Lyrics).mp3",
+      "path": "media/fav/Anuv Jain - JO TUM MERE HO (Lyrics).mp3",
+      "artist": "Anuv Jain",
+      "title": "Jo Tum Mere Ho",
+      "playlist": "fav"
+    },
+    {
+      "filename": "BYE - Aditya Bhardwaj (Official Music Video).mp3",
+      "path": "media/fav/BYE - Aditya Bhardwaj (Official Music Video).mp3",
+      "artist": "Aditya Bhardwaj",
+      "title": "Bye",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Beqarar Yeh Dil - Meem Se Mohabbat [ Full OST ] \ud83d\udc9e Singers\uff1a Asim Azhar & Qirat Haider - HUM TV.mp3",
+      "path": "media/fav/Beqarar Yeh Dil - Meem Se Mohabbat [ Full OST ] \ud83d\udc9e Singers\uff1a Asim Azhar & Qirat Haider - HUM TV.mp3",
+      "artist": "Asim Azhar & Qirat Haider",
+      "title": "Baat",
+      "playlist": "fav"
+    },
+    {
+      "filename": "CHAL DIYE TUM KAHAN \uff5c LYRICAL OST \uff5c VIDEO SONG - 4K \uff5c KABHI MAIN KABHI TUM \uff5c MUSTAFA x SHARJEENA.mp3",
+      "path": "media/fav/CHAL DIYE TUM KAHAN \uff5c LYRICAL OST \uff5c VIDEO SONG - 4K \uff5c KABHI MAIN KABHI TUM \uff5c MUSTAFA x SHARJEENA.mp3",
+      "artist": "AUR",
+      "title": "Chal Diye Tum Kahan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ho Gya Hai Ishq (From \uff02Ishq Di Chashni\uff02).mp3",
+      "path": "media/fav/Ho Gya Hai Ishq (From \uff02Ishq Di Chashni\uff02).mp3",
+      "artist": "Qirat Haider",
+      "title": "Ho Gya Hai Ishq",
+      "playlist": "fav"
+    },
+    {
+      "filename": "I'm Done \uff5c Maan Panu \uff5c I-Popstar \uff1a Vol.1 \uff5c EP02 \uff5c Amazon MX Player.mp3",
+      "path": "media/fav/I'm Done \uff5c Maan Panu \uff5c I-Popstar \uff1a Vol.1 \uff5c EP02 \uff5c Amazon MX Player.mp3",
+      "artist": "Maan Panu",
+      "title": "I'm Done",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ishq Official Lyrical Video I Amir Ameer \uff5c Faheem Abdullah \uff5c Rauhan Malik I Love Song 2024.mp3",
+      "path": "media/fav/Ishq Official Lyrical Video I Amir Ameer \uff5c Faheem Abdullah \uff5c Rauhan Malik I Love Song 2024.mp3",
+      "artist": "Amir Ameer",
+      "title": "Ishq",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ishq Wala Love Full Video - SOTY\uff5cAlia Bhatt,Sidharth Malhotra,Varun Dhawan\uff5cNeeti Mohan.mp3",
+      "path": "media/fav/Ishq Wala Love Full Video - SOTY\uff5cAlia Bhatt,Sidharth Malhotra,Varun Dhawan\uff5cNeeti Mohan.mp3",
+      "artist": "Neeti Mohan",
+      "title": "Ishq Wala Love",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Jeena Jeena - Full Audio Song \uff5c Badlapur \uff5c Varun Dhawan, Yami Gautam \uff5c Sachin-Jigar.mp3",
+      "path": "media/fav/Jeena Jeena - Full Audio Song \uff5c Badlapur \uff5c Varun Dhawan, Yami Gautam \uff5c Sachin-Jigar.mp3",
+      "artist": "Sachin-Jigar ft. Atif Aslam",
+      "title": "Jeena Jeena",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Karan Aujla \uff5c Ikky - Boyfriend (Official Audio).mp3",
+      "path": "media/fav/Karan Aujla \uff5c Ikky - Boyfriend (Official Audio).mp3",
+      "artist": "Karan Aujla ft. Ikky",
+      "title": "Boyfriend",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Karan Aujla, Ikky - For A Reason (Lyrics).mp3",
+      "path": "media/fav/Karan Aujla, Ikky - For A Reason (Lyrics).mp3",
+      "artist": "Karan Aujla ft. Ikky",
+      "title": "For A Reason",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Khwab - Official Lyric Video \uff5c Iqlipse Nova \uff5c Aditya A.mp3",
+      "path": "media/fav/Khwab - Official Lyric Video \uff5c Iqlipse Nova \uff5c Aditya A.mp3",
+      "artist": "Iqlipse Nova ft. Aditya A",
+      "title": "Khwab",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Lyrical\uff1a Mere Liye Tum Kaafi Ho \uff5c Shubh Mangal Zyada Saavdhan \uff5cAyushman Khurana,Jeetu \uff5c Tanishk-Vayu.mp3",
+      "path": "media/fav/Lyrical\uff1a Mere Liye Tum Kaafi Ho \uff5c Shubh Mangal Zyada Saavdhan \uff5cAyushman Khurana,Jeetu \uff5c Tanishk-Vayu.mp3",
+      "artist": "Tanishk-Vayu",
+      "title": "Mere Liye Tum Kaafi Ho",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Paro x Maand Lyrics - Aditya Rikhari, Bayaan.mp3",
+      "path": "media/fav/Paro x Maand Lyrics - Aditya Rikhari, Bayaan.mp3",
+      "artist": "Aditya Rikhari",
+      "title": "Paro x Maand",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Qurbaniyan (Orignal Soundtrack from Dekh Zara Pyar Se).mp3",
+      "path": "media/fav/Qurbaniyan (Orignal Soundtrack from Dekh Zara Pyar Se).mp3",
+      "artist": "Asim Azhar",
+      "title": "Qurbaniyan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Raastah by AUR ft. Taimour Baig \uff5c \u0631\u0627\u0633\u062a\u06c1  (Official Music Video).mp3",
+      "path": "media/fav/Raastah by AUR ft. Taimour Baig \uff5c \u0631\u0627\u0633\u062a\u06c1  (Official Music Video).mp3",
+      "artist": "AUR ft. Taimour Baig",
+      "title": "Raastah",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ranjheya Ve.mp3",
+      "path": "media/fav/Ranjheya Ve.mp3",
+      "artist": "Zain Zohaib",
+      "title": "Ranjheya Ve",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Sahiba (Full Audio) \uff1a Aditya Rikhari, Ankita Chhetri \uff5c T-Series.mp3",
+      "path": "media/fav/Sahiba (Full Audio) \uff1a Aditya Rikhari, Ankita Chhetri \uff5c T-Series.mp3",
+      "artist": "Aditya Rikhari",
+      "title": "Sahiba",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Sahiba (Music Video) Jasleen Royal \uff5cVijay Deverakonda Radhikka Madan\uff5cStebin\uff5c Priya\uff5cAditya\uff5c Sudhanshu.mp3",
+      "path": "media/fav/Sahiba (Music Video) Jasleen Royal \uff5cVijay Deverakonda Radhikka Madan\uff5cStebin\uff5c Priya\uff5cAditya\uff5c Sudhanshu.mp3",
+      "artist": "Jasleen Royal ft. Stebin Ben",
+      "title": "Sahiba",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Shikayat by AUR \uff5c \u0634\u06a9\u0627\u06cc\u062a  (Official Music Video).mp3",
+      "path": "media/fav/Shikayat by AUR \uff5c \u0634\u06a9\u0627\u06cc\u062a  (Official Music Video).mp3",
+      "artist": "AUR",
+      "title": "Shikayat",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Shubh - One Love (Official Audio).mp3",
+      "path": "media/fav/Shubh - One Love (Official Audio).mp3",
+      "artist": "Shubh",
+      "title": "One Love",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Sometimes by AUR \uff5c \u0633\u0645 \u0679\u0627\u0626\u0645\u0632  (Official Audio).mp3",
+      "path": "media/fav/Sometimes by AUR \uff5c \u0633\u0645 \u0679\u0627\u0626\u0645\u0632  (Official Audio).mp3",
+      "artist": "AUR",
+      "title": "Sometimes",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Tera Mera Hai Pyar Amar (from \uff02Ishq Murshid\uff02).mp3",
+      "path": "media/fav/Tera Mera Hai Pyar Amar (from \uff02Ishq Murshid\uff02).mp3",
+      "artist": "Ahmed Jahanzeb",
+      "title": "Tera Mera Hai Pyar",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Tu Hai Kahan by AUR \uff5c \u062a\u0648 \u06c1\u06d2 \u06a9\u06c1\u0627\u06ba (Official Music Video).mp3",
+      "path": "media/fav/Tu Hai Kahan by AUR \uff5c \u062a\u0648 \u06c1\u06d2 \u06a9\u06c1\u0627\u06ba (Official Music Video).mp3",
+      "artist": "AUR",
+      "title": "Tu Hai Kahan",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Tu Hain Toh \uff5c Mr. & Mrs. Mahi \uff5c Rajkummar Rao, Janhvi Kapoor \uff5c Hunny, Bunny, Sagar \uff5c Team Jaani.mp3",
+      "path": "media/fav/Tu Hain Toh \uff5c Mr. & Mrs. Mahi \uff5c Rajkummar Rao, Janhvi Kapoor \uff5c Hunny, Bunny, Sagar \uff5c Team Jaani.mp3",
+      "artist": "Hunny, Bunny, Sagar",
+      "title": "Tu Hain Toh",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Tum Hi Ho.mp3",
+      "path": "media/fav/Tum Hi Ho.mp3",
+      "artist": "Arijit Singh",
+      "title": "Tum Hi Ho",
+      "playlist": "fav"
+    },
+    {
+      "filename": "WAVY (OFFICIAL VIDEO) KARAN AUJLA \uff5c LATEST PUNJABI SONGS 2024.mp3",
+      "path": "media/fav/WAVY (OFFICIAL VIDEO) KARAN AUJLA \uff5c LATEST PUNJABI SONGS 2024.mp3",
+      "artist": "Karan Aujla",
+      "title": "Wavy",
+      "playlist": "fav"
+    },
+    {
+      "filename": "Ye Tune Kya Kiya Song Once Upon A Time In Mumbaai Dobara \uff5c Pritam \uff5c Akshay Kumar, Sonakshi Sinha.mp3",
+      "path": "media/fav/Ye Tune Kya Kiya Song Once Upon A Time In Mumbaai Dobara \uff5c Pritam \uff5c Akshay Kumar, Sonakshi Sinha.mp3",
+      "artist": "Pritam",
+      "title": "Ye Tune Kya Kiya",
+      "playlist": "fav"
+    }
+  ]
+}
