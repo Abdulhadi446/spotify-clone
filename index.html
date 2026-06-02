@@ -391,7 +391,7 @@ const GH_OWNER    = 'Abdulhadi446';
 const GH_REPO     = 'spotify-clone';
 const GH_WORKFLOW = 'add-song.yml';
 const GH_BRANCH   = 'master';
-const GH_TOKEN    = 'YOUR_FINE_GRAINED_TOKEN_HERE';  // ← replace this
+const GH_TOKEN    = 'YOUR_FINE_GRAINED_TOKEN_HERE';  // Injected at deploy time from GH_DOWNLOAD_TOKEN secret
 
 // ══ Detect if local server is running ══
 let apiAvailable = false;
@@ -816,7 +816,7 @@ async function startDownload(){
 
   // ── Cloud path (GitHub Actions) ──
   if (GH_TOKEN === 'YOUR_FINE_GRAINED_TOKEN_HERE') {
-    document.getElementById('dl-status').textContent='Cloud download not configured. Owner needs to set GH_TOKEN in index.html.';
+    document.getElementById('dl-status').textContent='Cloud download not configured. Owner: set GH_DOWNLOAD_TOKEN secret in repo Settings → Secrets and variables → Actions.';
     document.getElementById('dl-status').className='dl-status err';
     document.getElementById('dl-go-btn').disabled=false;
     return;
