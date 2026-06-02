@@ -356,12 +356,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
         <button class="dl-new-btn" onclick="createAndSelectPlaylist()">Create</button>
       </div>
     </div>
-    <!-- Cloud download settings (hidden when local server is available) -->
-    <div id="dl-cloud" class="hidden" style="border-top:1px solid rgba(255,255,255,.08);padding-top:12px;margin-top:2px">
-      <label style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px">GitHub Token</label>
-      <input class="dl-input" id="dl-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="margin-bottom:4px" oninput="saveToken()"/>
-      <small style="color:var(--muted);font-size:11px;display:block;line-height:1.4">Stored in your browser only. Needs <code style="color:var(--green)">workflow</code> scope. <a href="https://github.com/settings/tokens" target="_blank" rel="noopener" style="color:var(--green)">Get one here</a></small>
-    </div>
     <div class="dl-status" id="dl-status">Ready to download.</div>
     <div class="dl-actions">
       <button class="btn-cancel" onclick="closeDownload()">Cancel</button>
@@ -390,17 +384,14 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 <script>
 const API = 'http://localhost:8765';
 
-// ══ GitHub repo config (for cloud downloads via Actions) ══
+// ══ GitHub Actions config (cloud downloads) ══
+// Fine-grained PAT with ONLY "Actions: Read & Write" on this repo.
+// Generate at: https://github.com/settings/tokens?type=beta
 const GH_OWNER    = 'Abdulhadi446';
 const GH_REPO     = 'spotify-clone';
 const GH_WORKFLOW = 'add-song.yml';
 const GH_BRANCH   = 'master';
-let ghToken = localStorage.getItem('spotify-clone-gh-token') || '';
-
-function saveToken() {
-  ghToken = document.getElementById('dl-token').value.trim();
-  localStorage.setItem('spotify-clone-gh-token', ghToken);
-}
+const GH_TOKEN    = 'YOUR_FINE_GRAINED_TOKEN_HERE';  // ← replace this
 
 // ══ Detect if local server is running ══
 let apiAvailable = false;
@@ -782,16 +773,6 @@ async function openDownload() {
   document.getElementById('dl-status').className='dl-status';
   document.getElementById('dl-url').value='';
   document.getElementById('dl-go-btn').disabled=false;
-
-  // Show/hide cloud settings based on API availability
-  const cloudDiv = document.getElementById('dl-cloud');
-  if (!apiAvailable) {
-    cloudDiv.classList.remove('hidden');
-    document.getElementById('dl-token').value = ghToken;
-  } else {
-    cloudDiv.classList.add('hidden');
-  }
-
   document.getElementById('dl-overlay').classList.remove('hidden');
   document.getElementById('dl-url').focus();
 }
@@ -834,8 +815,8 @@ async function startDownload(){
   }
 
   // ── Cloud path (GitHub Actions) ──
-  if (!ghToken) {
-    document.getElementById('dl-status').textContent='Enter a GitHub token above to use cloud downloads.';
+  if (GH_TOKEN === 'YOUR_FINE_GRAINED_TOKEN_HERE') {
+    document.getElementById('dl-status').textContent='Cloud download not configured. Owner needs to set GH_TOKEN in index.html.';
     document.getElementById('dl-status').className='dl-status err';
     document.getElementById('dl-go-btn').disabled=false;
     return;
@@ -846,7 +827,7 @@ async function startDownload(){
     const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${ghToken}`,
+        'Authorization': `Bearer ${GH_TOKEN}`,
         'Accept': 'application/vnd.github+json',
         'Content-Type': 'application/json'
       },
