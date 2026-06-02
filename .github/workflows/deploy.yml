@@ -34,17 +34,6 @@ jobs:
           echo "Files to deploy:"
           find . -maxdepth 1 -not -name '.' -not -name '.git' -not -name '.github' | sort
 
-      - name: Inject download token
-        run: |
-          if [ -n "$GH_DOWNLOAD_TOKEN" ]; then
-            sed -i "s|YOUR_FINE_GRAINED_TOKEN_HERE|${GH_DOWNLOAD_TOKEN}|" index.html
-            echo "✓ Download token injected into index.html"
-          else
-            echo "::warning::GH_DOWNLOAD_TOKEN secret not set — cloud downloads will be disabled"
-          fi
-        env:
-          GH_DOWNLOAD_TOKEN: ${{ secrets.GH_DOWNLOAD_TOKEN }}
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -65,7 +54,6 @@ jobs:
           echo "- **Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Token injected:** ${{ secrets.GH_DOWNLOAD_TOKEN != '' }}" >> $GITHUB_STEP_SUMMARY
           if [ "${{ job.status }}" = "success" ]; then
             echo "- **URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
           fi

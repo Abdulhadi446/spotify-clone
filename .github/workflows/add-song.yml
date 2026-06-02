@@ -12,11 +12,6 @@ on:
         required: false
         default: 'Downloads'
         type: string
-      confirm:
-        description: 'Type "yes" to confirm download'
-        required: true
-        type: string
-
 permissions:
   contents: write
 
@@ -31,12 +26,6 @@ jobs:
       - name: Validate inputs
         run: |
           set -euo pipefail
-
-          # Confirm
-          if [ "${{ inputs.confirm }}" != "yes" ]; then
-            echo "::error::Download not confirmed. Type 'yes' to proceed."
-            exit 1
-          fi
 
           # URL format
           URL="${{ inputs.url }}"

@@ -382,32 +382,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 <audio id="aud"></audio>
 
 <script>
-const API = 'http://localhost:8765';
+// ── Cloudflare Worker API ──
+// Deploy: wrangler deploy cloudflare-worker.js
+// Then set GH_TOKEN: wrangler secret put GH_TOKEN
+const API = 'https://spotify-clone-api.abdulhadi.workers.dev';
 
-// ══ GitHub Actions config (cloud downloads) ══
-// Fine-grained PAT with ONLY "Actions: Read & Write" on this repo.
-// Generate at: https://github.com/settings/tokens?type=beta
-const GH_OWNER    = 'Abdulhadi446';
-const GH_REPO     = 'spotify-clone';
-const GH_WORKFLOW = 'add-song.yml';
-const GH_BRANCH   = 'master';
-const GH_TOKEN    = 'YOUR_FINE_GRAINED_TOKEN_HERE';  // Injected at deploy time from GH_DOWNLOAD_TOKEN secret
-
-// ══ Detect if local server is running ══
-let apiAvailable = false;
-fetch(`${API}/playlists`, {signal: AbortSignal.timeout(2000)})
-  .then(r => { if (r.ok) apiAvailable = true; })
-  .catch(() => {})
-  .finally(() => {
-    if (!apiAvailable) {
-      const dlBtn = document.querySelector('.dl-trigger');
-      if (dlBtn) {
-        dlBtn.style.opacity = '1';
-        dlBtn.style.cursor = 'pointer';
-        dlBtn.title = 'Download via GitHub Actions (cloud)';
-      }
-    }
-  });
+const apiAvailable = true; // Worker handles everything
 
 // ══ SONGS metadata map (from your tagger script) ══
 const SONGS_MAP = {
@@ -798,56 +778,28 @@ async function startDownload(){
   document.getElementById('dl-go-btn').disabled=true;
   document.getElementById('dl-status').className='dl-status';
 
-  // ── Local server path ──
-  if (apiAvailable) {
-    document.getElementById('dl-status').textContent='Starting download…';
-    try {
-      const r = await fetch(`${API}/download`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,folder})});
-      const j = await r.json();
-      if(j.error){ throw new Error(j.error); }
-      pollJob(j.job_id, folder);
-    } catch(e) {
-      document.getElementById('dl-status').textContent='Error: '+e.message;
-      document.getElementById('dl-status').className='dl-status err';
-      document.getElementById('dl-go-btn').disabled=false;
-    }
-    return;
-  }
-
-  // ── Cloud path (GitHub Actions) ──
-  if (GH_TOKEN === 'YOUR_FINE_GRAINED_TOKEN_HERE') {
-    document.getElementById('dl-status').textContent='Cloud download not configured. Owner: set GH_DOWNLOAD_TOKEN secret in repo Settings → Secrets and variables → Actions.';
-    document.getElementById('dl-status').className='dl-status err';
-    document.getElementById('dl-go-btn').disabled=false;
-    return;
-  }
-
-  document.getElementById('dl-status').textContent='Queuing download via GitHub Actions…';
+  document.getElementById('dl-status').textContent='Queuing download…';
   try {
-    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`, {
+    const r = await fetch(`${API}/download`, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${GH_TOKEN}`,
-        'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ref: GH_BRANCH,
-        inputs: { url, playlist: folder, confirm: 'yes' }
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url, folder })
     });
 
-    if (r.ok || r.status === 204) {
+    const j = await r.json();
+    if (j.ok || r.status === 202) {
+      if (j.run_id) {
+        pollJob(j.run_id, folder);
+        return;
+      }
       document.getElementById('dl-status').innerHTML =
         '<span style="color:#1ed760">✓ Download queued!</span><br>' +
         'The song will appear in <strong>~1–2 minutes</strong>.<br>' +
         '<small style="color:var(--muted)">GitHub Actions is downloading it now. The page will refresh automatically.</small>';
       document.getElementById('dl-status').className='dl-status ok';
-      // Auto-refresh after 90 seconds to pick up the new song
       setTimeout(() => location.reload(), 90000);
     } else {
-      const err = await r.json().catch(() => ({}));
-      throw new Error(err.message || `HTTP ${r.status}`);
+      throw new Error(j.error || `HTTP ${r.status}`);
     }
   } catch(e) {
     document.getElementById('dl-status').textContent='Error: '+e.message;
@@ -887,12 +839,9 @@ async function submitNewPlaylist(){
   if(!name){ alert('Enter a name.'); return; }
   try {
     await fetch(`${API}/create-playlist`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});
-    await loadLibrary();
-  } catch {
-    // server not running, just add locally
-    if(!library[name]) library[name]=[];
-    renderSidebar();
-  }
+  } catch {}
+  if(!library[name]) library[name]=[];
+  renderSidebar();
   closeNewPlaylist();
 }
 
