@@ -34,8 +34,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .sb-lib{background:var(--surface);border-radius:var(--radius);margin:0 8px 8px;flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
 .sb-lib-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 8px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
 .sb-lib-header span{display:flex;align-items:center;gap:8px}
-.sb-add-btn{background:none;border:none;color:var(--muted);cursor:pointer;display:flex;align-items:center;padding:2px;border-radius:50%;transition:color .15s}
-.sb-add-btn:hover{color:var(--green)}
 .sb-playlists{overflow-y:auto;scrollbar-width:thin;scrollbar-color:#444 transparent;padding:0 8px 8px;flex:1}
 .pl-item{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:6px;cursor:pointer;transition:background .15s;user-select:none}
 .pl-item:hover{background:var(--s2)}
@@ -54,10 +52,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 #hamburger{display:none}
 .profile-pill{background:var(--s3);border:none;color:var(--text);border-radius:20px;padding:4px 10px 4px 4px;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit}
 .avatar{width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-
-/* download btn in topbar */
-.dl-trigger{background:var(--green);border:none;color:#000;border-radius:20px;padding:7px 14px;display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:background .15s,transform .12s}
-.dl-trigger:hover{background:#1ed760;transform:scale(1.04)}
 
 /* hero */
 .hero{padding:16px 20px 20px;display:flex;align-items:flex-end;gap:20px;flex-shrink:0}
@@ -131,38 +125,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .vol-fill{height:100%;background:var(--muted);border-radius:2px;transition:background .15s}
 .vol-track:hover .vol-fill{background:var(--green)}
 
-/* ═══ DOWNLOAD PANEL ═══ */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
-.overlay.hidden{display:none}
-.dl-panel{background:#1a1a1a;border:1px solid rgba(255,255,255,.1);border-radius:14px;width:100%;max-width:480px;padding:28px;display:flex;flex-direction:column;gap:18px}
-.dl-panel h2{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
-.dl-panel label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px}
-.dl-input{width:100%;background:var(--s3);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
-.dl-input:focus{border-color:var(--green)}
-.dl-select{width:100%;background:var(--s3);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;font-family:inherit;outline:none;cursor:pointer;transition:border-color .2s}
-.dl-select:focus{border-color:var(--green)}
-.dl-new-row{display:flex;gap:8px;margin-top:8px}
-.dl-new-input{flex:1;background:var(--s3);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s}
-.dl-new-input:focus{border-color:var(--green)}
-.dl-new-btn{background:var(--s2);border:1px solid rgba(255,255,255,.1);color:var(--text);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px;font-family:inherit;white-space:nowrap;transition:background .15s}
-.dl-new-btn:hover{background:var(--s3)}
-.dl-actions{display:flex;gap:10px;justify-content:flex-end}
-.btn-cancel{background:none;border:1px solid rgba(255,255,255,.15);color:var(--text);border-radius:8px;padding:10px 20px;cursor:pointer;font-size:14px;font-family:inherit;transition:background .15s}
-.btn-cancel:hover{background:var(--s2)}
-.btn-dl{background:var(--green);border:none;color:#000;border-radius:8px;padding:10px 20px;cursor:pointer;font-size:14px;font-weight:700;font-family:inherit;transition:background .15s,transform .12s}
-.btn-dl:hover{background:#1ed760;transform:scale(1.03)}
-.btn-dl:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.dl-status{background:var(--s3);border-radius:8px;padding:12px 14px;font-size:12px;font-family:monospace;color:var(--muted);min-height:44px;word-break:break-all;line-height:1.5}
-.dl-status.ok{color:#1ed760}
-.dl-status.err{color:#e74c3c}
-
-/* new playlist modal */
-.np-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
-.np-overlay.hidden{display:none}
-.np-panel{background:#1a1a1a;border:1px solid rgba(255,255,255,.1);border-radius:12px;width:100%;max-width:340px;padding:24px;display:flex;flex-direction:column;gap:16px}
-.np-panel h3{font-size:18px;font-weight:700}
-.np-actions{display:flex;gap:10px;justify-content:flex-end}
-
 /* scrollbars */
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -190,8 +152,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
   .p-right{display:none}
   .p-track{width:auto;flex:1}
   .p-title,.p-artist{max-width:none}
-  .dl-trigger span{display:none}
-  .dl-trigger{padding:7px 10px}
+
 }
 @media(max-width:400px){
   .hero{flex-direction:column;align-items:flex-start;gap:14px}
@@ -226,9 +187,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
         Playlists
       </span>
-      <button class="sb-add-btn" title="New playlist" onclick="openNewPlaylist()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      </button>
+
     </div>
     <div class="sb-playlists" id="sb-playlists"></div>
   </div>
@@ -243,10 +202,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
       </button>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
-      <button class="dl-trigger" onclick="openDownload()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7v2h14v-2H5z"/></svg>
-        <span>Download</span>
-      </button>
       <button class="profile-pill">
         <div class="avatar">A</div>
         Abdulhadi
@@ -337,107 +292,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 
 </div><!-- #app -->
 
-<!-- ══ DOWNLOAD PANEL ══ -->
-<div class="overlay hidden" id="dl-overlay">
-  <div class="dl-panel">
-    <h2>
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="#1DB954"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7v2h14v-2H5z"/></svg>
-      Download Song
-    </h2>
-    <div>
-      <label>YouTube / SoundCloud URL</label>
-      <input class="dl-input" id="dl-url" type="url" placeholder="https://www.youtube.com/watch?v=..."/>
-    </div>
-    <div>
-      <label>Save to playlist</label>
-      <select class="dl-select" id="dl-folder"></select>
-      <div class="dl-new-row">
-        <input class="dl-new-input" id="dl-new-name" placeholder="Or create new playlist…"/>
-        <button class="dl-new-btn" onclick="createAndSelectPlaylist()">Create</button>
-      </div>
-    </div>
-    <div class="dl-status" id="dl-status">Ready to download.</div>
-    <div class="dl-actions">
-      <button class="btn-cancel" onclick="closeDownload()">Cancel</button>
-      <button class="btn-dl" id="dl-go-btn" onclick="startDownload()">⬇ Download</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ NEW PLAYLIST MODAL ══ -->
-<div class="np-overlay hidden" id="np-overlay">
-  <div class="np-panel">
-    <h3>New Playlist</h3>
-    <div>
-      <label style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;display:block;margin-bottom:6px">Playlist name</label>
-      <input class="dl-input" id="np-name" placeholder="e.g. Road Trip"/>
-    </div>
-    <div class="np-actions">
-      <button class="btn-cancel" onclick="closeNewPlaylist()">Cancel</button>
-      <button class="btn-dl" onclick="submitNewPlaylist()">Create</button>
-    </div>
-  </div>
-</div>
-
 <audio id="aud"></audio>
 
 <script>
-// ── API (same origin — served by Cloudflare Worker + static assets) ──
-// Deploy: wrangler deploy. Then set GH_TOKEN: wrangler secret put GH_TOKEN
-const API = '';
-
-const apiAvailable = true;
-
-// ══ SONGS metadata map (from your tagger script) ══
-const SONGS_MAP = {
-  "aap ka aana":            ["Dj Saurabh",                   "Aap Ka Aana Dil Dhadkana"],
-  "nadaaniyan":             ["Akshath",                       "Nadaaniyan"],
-  "afsos":                  ["Anuv Jain ft. AP Dhillon",      "Afsos"],
-  "alag aasmaan":           ["Anuv Jain",                     "Alag Aasmaan"],
-  "husn":                   ["Anuv Jain",                     "Husn"],
-  "jo tum mere ho":         ["Anuv Jain",                     "Jo Tum Mere Ho"],
-  "meem se mohabbat":       ["Asim Azhar & Qirat Haider",     "Baat"],
-  "bye":                    ["Aditya Bhardwaj",               "Bye"],
-  "chal diye tum kahan":    ["AUR",                           "Chal Diye Tum Kahan"],
-  "ishq di chashni":        ["Qirat Haider",                  "Ho Gya Hai Ishq"],
-  "i'm done":               ["Maan Panu",                     "I'm Done"],
-  "ishq official":          ["Amir Ameer",                    "Ishq"],
-  "ishq wala love":         ["Neeti Mohan",                   "Ishq Wala Love"],
-  "jeena jeena":            ["Sachin-Jigar ft. Atif Aslam",   "Jeena Jeena"],
-  "boyfriend":              ["Karan Aujla ft. Ikky",          "Boyfriend"],
-  "for a reason":           ["Karan Aujla ft. Ikky",          "For A Reason"],
-  "khwab":                  ["Iqlipse Nova ft. Aditya A",     "Khwab"],
-  "mere liye tum kaafi ho": ["Tanishk-Vayu",                  "Mere Liye Tum Kaafi Ho"],
-  "paro x maand":           ["Aditya Rikhari",                "Paro x Maand"],
-  "qurbaniyan":             ["Asim Azhar",                    "Qurbaniyan"],
-  "raastah":                ["AUR ft. Taimour Baig",          "Raastah"],
-  "ranjheya ve":            ["Zain Zohaib",                   "Ranjheya Ve"],
-  "sahiba (full audio)":    ["Aditya Rikhari",                "Sahiba"],
-  "sahiba (music video)":   ["Jasleen Royal ft. Stebin Ben",  "Sahiba"],
-  "shikayat":               ["AUR",                           "Shikayat"],
-  "one love":               ["Shubh",                         "One Love"],
-  "sometimes":              ["AUR",                           "Sometimes"],
-  "ishq murshid":           ["Ahmed Jahanzeb",                "Tera Mera Hai Pyar"],
-  "tu hai kahan":           ["AUR",                           "Tu Hai Kahan"],
-  "tu hain toh":            ["Hunny, Bunny, Sagar",           "Tu Hain Toh"],
-  "tum hi ho":              ["Arijit Singh",                  "Tum Hi Ho"],
-  "wavy":                   ["Karan Aujla",                   "Wavy"],
-  "ye tune kya kiya":       ["Pritam",                        "Ye Tune Kya Kiya"],
-  "meri zindagi":           ["Anuv Jain",                     "Meri Zindagi Hai Tu"],
-};
-
-function resolveMeta(filename) {
-  const low = filename.toLowerCase();
-  for (const [key, [artist, title]] of Object.entries(SONGS_MAP)) {
-    if (low.includes(key)) return { artist, title };
-  }
-  // fallback: parse filename
-  const name = filename.replace(/\.mp3$/i, '');
-  const m = name.match(/^(.+?)\s*[-–]\s*(.+)/);
-  if (m) return { artist: m[1].trim(), title: m[2].replace(/\(Official[^)]*\)/gi,'').replace(/\(Lyrics\)/gi,'').trim() };
-  return { artist: 'Unknown', title: name };
-}
-
 const GRADS = [
   ['#1DB954','#116930'],['#3D4F7C','#1f2d4e'],['#8E44AD','#5b2c6f'],
   ['#C0392B','#7b241c'],['#D35400','#784212'],['#1A5276','#154360'],
@@ -461,73 +318,15 @@ let isShuffle  = false;
 let isRepeat   = false;
 let volume     = 0.7;
 let liked      = new Set();
-let globalIdx  = 0;           // counter for unique gradient assignment
-
 const aud = document.getElementById('aud');
 aud.volume = volume;
 
-// ══ Load library from server ══
+// ══ Load library from songs.json ══
 async function loadLibrary() {
-  try {
-    const r = await fetch(`${API}/playlists`);
-    if (!r.ok) throw new Error();
-    library = await r.json();
-  } catch {
-    try {
-      const r2 = await fetch('songs.json', {cache: 'no-cache'});
-      if (r2.ok) {
-        library = await r2.json();
-        renderSidebar();
-        selectPlaylist('All Songs');
-        return;
-      }
-    } catch {}
-    library = buildFallbackLibrary();
-  }
+  const r = await fetch('songs.json', {cache: 'no-cache'});
+  library = await r.json();
   renderSidebar();
   selectPlaylist('All Songs');
-}
-
-function buildFallbackLibrary() {
-  const rawFiles = [
-    "Aap Ka Aana Dil Dhadkana -_- Hard Bass Remix -_- Dj SAURABH Jaipur.mp3",
-    "Akshath - Nadaaniyan (Official Lyric Video).mp3",
-    "Anuv Jain - AFSOS ft. AP Dhillon (Official Visualizer).mp3",
-    "Anuv Jain - ALAG AASMAAN (a song on the ukulele).mp3",
-    "Anuv Jain - HUSN (Lyrics).mp3","Anuv Jain - JO TUM MERE HO (Lyrics).mp3",
-    "BYE - Aditya Bhardwaj (Official Music Video).mp3",
-    "Beqarar Yeh Dil - Meem Se Mohabbat [ Full OST ] Singers Asim Azhar & Qirat Haider - HUM TV.mp3",
-    "CHAL DIYE TUM KAHAN LYRICAL OST KABHI MAIN KABHI TUM MUSTAFA x SHARJEENA.mp3",
-    "Ho Gya Hai Ishq (From Ishq Di Chashni).mp3",
-    "I'm Done Maan Panu I-Popstar Vol.1.mp3",
-    "Ishq Official Lyrical Video I Amir Ameer Love Song 2024.mp3",
-    "Ishq Wala Love Full Video - SOTY Neeti Mohan.mp3",
-    "Jeena Jeena - Full Audio Song Badlapur Sachin-Jigar.mp3",
-    "Karan Aujla Ikky - Boyfriend (Official Audio).mp3",
-    "Karan Aujla, Ikky - For A Reason (Lyrics).mp3",
-    "Khwab - Official Lyric Video Iqlipse Nova Aditya A.mp3",
-    "Lyrical Mere Liye Tum Kaafi Ho Shubh Mangal Zyada Saavdhan.mp3",
-    "Paro x Maand Lyrics - Aditya Rikhari, Bayaan.mp3",
-    "Qurbaniyan (Orignal Soundtrack from Dekh Zara Pyar Se).mp3",
-    "Raastah by AUR ft. Taimour Baig (Official Music Video).mp3",
-    "Ranjheya Ve.mp3",
-    "Sahiba (Full Audio) Aditya Rikhari, Ankita Chhetri T-Series.mp3",
-    "Sahiba (Music Video) Jasleen Royal.mp3",
-    "Shikayat by AUR (Official Music Video).mp3",
-    "Shubh - One Love (Official Audio).mp3",
-    "Sometimes by AUR (Official Audio).mp3",
-    "Tera Mera Hai Pyar Amar (from Ishq Murshid).mp3",
-    "Tu Hai Kahan by AUR (Official Music Video).mp3",
-    "Tu Hain Toh Mr. & Mrs. Mahi.mp3",
-    "Tum Hi Ho.mp3",
-    "WAVY (OFFICIAL VIDEO) KARAN AUJLA.mp3",
-    "Ye Tune Kya Kiya Song Once Upon A Time In Mumbaai Dobara Pritam.mp3"
-  ];
-  const tracks = rawFiles.map((f,i) => {
-    const {artist,title} = resolveMeta(f);
-    return {filename:f, path:`media/${f}`, artist, title, playlist:'All Songs', _gi:i};
-  });
-  return {'All Songs': tracks};
 }
 
 // assign gradient index once
@@ -584,7 +383,7 @@ function renderTrackList() {
     body.innerHTML = `<div class="empty-state">
       <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
       <p>This playlist is empty</p>
-      <small>Download songs to add them here</small>
+      <small>Add MP3 files to a playlist folder</small>
     </div>`;
     return;
   }
@@ -612,7 +411,7 @@ function playFromQueue(i) {
   }
   queueIdx = i;
   const t = queue[i];
-  aud.src = `${API.replace('//','//')}/${t.path}`;
+  aud.src = t.path;
   aud.play().catch(()=>{ aud.src = t.path; aud.play().catch(()=>{}); });
   isPlaying = true;
   updatePPUI();
@@ -736,117 +535,6 @@ document.addEventListener('keydown', e=>{
 // ══ Mobile sidebar ══
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebar-overlay').classList.toggle('visible'); }
 function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebar-overlay').classList.remove('visible'); }
-
-// ══ Download panel ══
-async function openDownload() {
-  // populate folder list
-  const sel = document.getElementById('dl-folder');
-  sel.innerHTML = '';
-  let folders = ['All Songs'];
-  try {
-    const r = await fetch(`${API}/folders`);
-    if(r.ok) folders = await r.json();
-  } catch {}
-  folders.forEach(f=>{ const o=document.createElement('option'); o.value=f; o.textContent=f; sel.appendChild(o); });
-  document.getElementById('dl-status').textContent='Ready to download.';
-  document.getElementById('dl-status').className='dl-status';
-  document.getElementById('dl-url').value='';
-  document.getElementById('dl-go-btn').disabled=false;
-  document.getElementById('dl-overlay').classList.remove('hidden');
-  document.getElementById('dl-url').focus();
-}
-function closeDownload(){ document.getElementById('dl-overlay').classList.add('hidden'); }
-
-async function createAndSelectPlaylist(){
-  const name = document.getElementById('dl-new-name').value.trim();
-  if(!name) return;
-  try {
-    await fetch(`${API}/create-playlist`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});
-  } catch {}
-  // re-open to refresh list
-  await openDownload();
-  document.getElementById('dl-folder').value = name;
-  document.getElementById('dl-new-name').value='';
-}
-
-let _pollTimer = null;
-async function startDownload(){
-  const url = document.getElementById('dl-url').value.trim();
-  const folder = document.getElementById('dl-folder').value;
-  if(!url){ alert('Please enter a URL.'); return; }
-  document.getElementById('dl-go-btn').disabled=true;
-  document.getElementById('dl-status').className='dl-status';
-
-  document.getElementById('dl-status').textContent='Queuing download…';
-  try {
-    const r = await fetch(`${API}/download`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url, folder })
-    });
-
-    const j = await r.json();
-    if (j.ok || r.status === 202) {
-      if (j.run_id) {
-        pollJob(j.run_id, folder);
-        return;
-      }
-      document.getElementById('dl-status').innerHTML =
-        '<span style="color:#1ed760">✓ Download queued!</span><br>' +
-        'The song will appear in <strong>~1–2 minutes</strong>.<br>' +
-        '<small style="color:var(--muted)">GitHub Actions is downloading it now. The page will refresh automatically.</small>';
-      document.getElementById('dl-status').className='dl-status ok';
-      setTimeout(() => location.reload(), 90000);
-    } else {
-      throw new Error(j.error || `HTTP ${r.status}`);
-    }
-  } catch(e) {
-    document.getElementById('dl-status').textContent='Error: '+e.message;
-    document.getElementById('dl-status').className='dl-status err';
-    document.getElementById('dl-go-btn').disabled=false;
-  }
-}
-
-async function pollJob(id, folder){
-  clearTimeout(_pollTimer);
-  try {
-    const r = await fetch(`${API}/job?id=${id}`);
-    const j = await r.json();
-    document.getElementById('dl-status').textContent = j.progress || '…';
-    if(j.status==='done'){
-      document.getElementById('dl-status').className='dl-status ok';
-      document.getElementById('dl-status').textContent='✓ Download complete! Refreshing library…';
-      document.getElementById('dl-go-btn').disabled=false;
-      setTimeout(async ()=>{ await loadLibrary(); selectPlaylist(folder); closeDownload(); }, 1200);
-    } else if(j.status==='error'){
-      document.getElementById('dl-status').className='dl-status err';
-      document.getElementById('dl-status').textContent='Error: '+(j.error||'unknown');
-      document.getElementById('dl-go-btn').disabled=false;
-    } else {
-      _pollTimer = setTimeout(()=>pollJob(id,folder), 700);
-    }
-  } catch {
-    _pollTimer = setTimeout(()=>pollJob(id,folder), 1500);
-  }
-}
-
-// ══ New Playlist modal ══
-function openNewPlaylist(){ document.getElementById('np-overlay').classList.remove('hidden'); document.getElementById('np-name').value=''; setTimeout(()=>document.getElementById('np-name').focus(),50); }
-function closeNewPlaylist(){ document.getElementById('np-overlay').classList.add('hidden'); }
-async function submitNewPlaylist(){
-  const name = document.getElementById('np-name').value.trim();
-  if(!name){ alert('Enter a name.'); return; }
-  try {
-    await fetch(`${API}/create-playlist`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});
-  } catch {}
-  if(!library[name]) library[name]=[];
-  renderSidebar();
-  closeNewPlaylist();
-}
-
-// close download on overlay click
-document.getElementById('dl-overlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeDownload(); });
-document.getElementById('np-overlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeNewPlaylist(); });
 
 // ══ Topbar gradient on scroll ══
 document.getElementById('main').addEventListener('scroll', e=>{
