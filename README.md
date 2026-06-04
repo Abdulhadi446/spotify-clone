@@ -1,66 +1,39 @@
-# Spotify Clone - Static Web Player
+# Spotify Clone
 
-A beautiful, feature-rich Spotify clone built with vanilla HTML/CSS/JavaScript. Play local MP3s organized into playlists, with headphone button support via Media Session API.
+A music player with two interfaces — **static web** (HTML/JS) and **desktop app** (Python/customtkinter).
 
-## Features
-
-- Play/pause, next/previous tracks
-- Shuffle and repeat modes
-- Progress bar with seek support
-- Volume control
-- Keyboard shortcuts (Space, Arrow keys, N, P)
-- Media Session API (headphone button support, lock screen controls)
-- Playlist organization via folders
-- Smart metadata extraction from filenames
-- Beautiful gradient thumbnails
-
-## Usage
-
-Simply open `index.html` in any browser, or serve the folder with any static file server:
+## Desktop App
 
 ```bash
-python3 -m http.server 8080
+# setup
+python3 -m venv .venv
+source .venv/bin/activate
+pip install customtkinter pygame
+
+# run
+python3 spotify_player.py
 ```
 
-### Playing Music
+## Web App
 
-- Click any track to play
-- Use play/pause button (Spacebar)
-- Next/Previous buttons or arrow keys
-- Progress bar for seeking
+Open `index.html` in any browser.
 
-### Adding Music
+## Add a Song
 
-1. Add MP3 files to folders in `media/` directory
-2. Update `songs.json` with the track metadata
-3. Refresh the page
+```bash
+python3 add_song.py "https://youtube.com/watch?v=..." [playlist]
+```
 
-## Keyboard Shortcuts
-
-| Key | Action |
-|-----|--------|
-| Space | Play/Pause |
-| ← | Rewind 10s |
-| → | Forward 10s |
-| ↑ | Volume up |
-| ↓ | Volume down |
-| N | Next track |
-| P | Previous track |
+Downloads audio, updates `songs.json`, commits and pushes to GitHub.
 
 ## File Structure
 
 ```
 spotify_clone/
-├── index.html       # Main player UI
-├── songs.json       # Track metadata catalog
-├── media/           # MP3 files organized by playlist folders
-│   ├── fav/         # Playlist with songs
-│   └── ...          # More playlists
-└── README.md        # This file
+├── index.html           # Web player
+├── spotify_player.py    # Desktop player
+├── add_song.py          # Download + add tool
+├── songs.json           # Track metadata
+├── media/               # MP3 files by playlist folder
+└── README.md
 ```
-
-## Tech Stack
-
-- Vanilla HTML + CSS + JavaScript (no frameworks)
-- HTML5 `<audio>` element + Media Session API
-- Google Fonts (DM Sans)
